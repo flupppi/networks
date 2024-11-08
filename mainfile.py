@@ -24,4 +24,4 @@ if __name__ == '__main__':
     compare_matrices(n_values=[500, 1000, 1500, 2000, 2500, 3000], d=1, x=2)  # Runtime comparison
 
     # Task 4: Conditioning and relative error analysis
-    plot_conditioning_vs_error()
+    #plot_conditioning_vs_error()

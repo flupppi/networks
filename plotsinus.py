@@ -5,6 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
+
 # %% Plotting Sine Function
 def plot_sine(n):
     """
@@ -17,15 +19,19 @@ def plot_sine(n):
     - A plot of sin(2πx) over the range (0, 1).
     """
     # Generate an array a with values in (0, 1)
-    a = np.linspace(1, n, n) / n
-    b = np.sin(2 * np.pi * a)  # Array of sine values based on a
+    a: np.ndarray = np.linspace(start=1, stop=n, num=n) / n
+    A = np.arange(1, n + 1) / n
 
+    b: np.ndarray = np.sin(2 * np.pi * a)  # Array of sine values based on a
+    print(b)
     print(f"Sum of array a: {np.sum(a)}")  # Display sum of array components
 
     # Plot the sine function with labels and title
-    plt.plot(a, b, label="sin(x)")
+    plt.plot(a, b, '-b', label="sin(x)")
     plt.xlabel("x values")
-    plt.ylabel("sin(x)")
+    plt.ylabel("$\sin(x)$")
     plt.title("Sinus Plot")
     plt.legend()
+    plt.savefig("sinus.pdf", format="pdf")
+
     plt.show()

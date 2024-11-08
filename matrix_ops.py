@@ -33,7 +33,6 @@ def genmatrix(n, d, x):
     return matrix
 
 
-# %% Matrix Generation without Loops
 def fastmatrix(n, d, x):
     """
     Quickly generates an n x n matrix with ones on the main diagonal and 'x' on the d-th
@@ -55,7 +54,6 @@ def fastmatrix(n, d, x):
     return matrix
 
 
-# %% Runtime Comparison of Matrix Generation Methods
 def compare_matrices(n_values, d, x):
     """
     Compares the runtime of genmatrix and fastmatrix functions for a range of matrix sizes
@@ -85,4 +83,6 @@ def compare_matrices(n_values, d, x):
     plt.xlabel("Matrix Dimension (n)")
     plt.ylabel("Time (s)")
     plt.legend()
+    plt.savefig("matrix_comparison.pdf", format="pdf")
+
     plt.show()
