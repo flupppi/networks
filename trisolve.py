@@ -1,64 +1,6 @@
 import numpy as np
 from numpy import dtype
 
-
-def trisolve_using_loops(M: np.ndarray, b: np.array):
-    """
-    Takes a matrix M and a vector b and calculates the vector x using foreward or backward substitution.#
-    Solves the linear system M*x = b
-    Here we use two loops to calculate the product sum
-
-    :param M: input matrix
-    :param b: input vector
-    :return: vector x
-    """
-    print(f'Matrix M = {M}\nVector b = {b}')
-    print(f'Solving for x in Equation Mx = b using', end=" ")
-    info: int = 0
-    try:
-        n = len(M)
-        if np.allclose(M,
-                       np.tril(M)):  # checks if each element of a matrix is close (equal) to another matrix it is compared to
-            print('foreward substitution')
-
-            x = np.zeros_like(b, dtype=float)
-            # np.tril: returns a copy of the matrix with all values in the upper triangle zeroed
-            M_l = M.copy()
-            for i in range(n):
-                if M_l[i, i] == 0:
-                    raise ZeroDivisionError(f'M[{i},{i}] == 0')
-                sum_ = 0.0
-                for k in range(i): # slower version using two loops
-                    sum_ += M_l[i, k] * x[k]
-                x[i] = (b[i] - sum_) / M_l[i, i]
-                x[i] = (b[i] - np.dot(M[i, :i], x[:i])) / M[i, i]
-            info = 42
-        elif np.allclose(M, np.triu(M)):
-            print('back substitution')
-
-            x = np.zeros_like(b, dtype=float)
-            # np.tril: returns a copy of the matrix with all values in the lower triangle zeroed
-            M_u = M.copy
-            for i in reversed(range(n)):
-                if M_u[i, i] == 0:
-                    raise ZeroDivisionError(f'M[{i},{i}] == 0')
-                sum_ = 0.0
-                for k in range(i+1, n): # slower version using two loops
-                   sum_ += M_u[i, k] * x[k]
-                x[i] = (b[i] - sum_) / M_u[i, i]
-            info = 42
-
-        else:
-            print("Error: Matrix M is not a triangular matrix")
-            x = np.full_like(M, np.nan, dtype=float)
-            info = 0
-
-    except Exception as e:
-        print(f'An unexpected error occurred: {e}')
-        x = np.full_like(b, np.nan, dtype=float)
-        info = 0
-    return x, info
-
 def trisolve(M: np.ndarray, b: np.array):
     """
     Takes a matrix M and a vector b and calculates the vector x using forward or backward substitution.
