@@ -15,9 +15,22 @@ def solve(M, b) -> np.ndarray:
         print(f'Result = {result}\n')
         return result
 
+def calculate_condition_numbers(M):
+    """
+    Calculates the Frobenius- and 2-Norm-Condition Numbers and prints and returns them.
+    :param M: Input Matrix
+    :return: Condition Numbers for the Frobenius and 2-Norm
+    """
+    frobenius_cond = np.linalg.cond(M, 'fro')
+    two_norm_cond = np.linalg.cond(M, 2)
+    print(f'Frobenius norm condition number of M: {frobenius_cond}')
+    print(f'2-norm condition number of M: {two_norm_cond}\n')
+    return frobenius_cond, two_norm_cond
+
 
 if __name__ == "__main__":
     # %% A4.1 a)
+    print("Aufgabe 4.1 a)")
     A1 = np.array([[2, -1, -3, 3],
                    [4, 0, -3, 1],
                    [6, 1, -1, 6],
@@ -28,8 +41,10 @@ if __name__ == "__main__":
         solve(A1, b1)
     except SingularMatrixError as e:
         print(e)
+    calculate_condition_numbers(A1)
 
     # %% A4.1 b)
+    print("Aufgabe 4.1 b)")
     A2 = np.array([[1, 0, 6, 2],
                    [8, 0, -2, -2],
                    [2, 9, 1, 3],
@@ -40,7 +55,7 @@ if __name__ == "__main__":
         solve(A2, b2)
     except SingularMatrixError as e:
         print(e)
-
+    calculate_condition_numbers(A2)
 
     # %% A4.1 Test case with determinant equal to zero
 
@@ -56,3 +71,17 @@ if __name__ == "__main__":
         solve(M_singular, b_singular)
     except SingularMatrixError as e:
         print(e)
+
+    np.linalg.qr(M_singular)
+    # %%
+    A = np.array([[2,-4,-6],[-2, 4, 5], [1, -1, 3]])
+    b = np.array([-2, 0, 10])
+
+    print(np.linalg.det(A))
+
+    try:
+        solve(A, b)
+    except SingularMatrixError as e:
+        print(e)
+
+    # %% 4.2
