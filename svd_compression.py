@@ -83,24 +83,36 @@ def aufgabe_2():
 
 
 
-
 def compress_image(image, k):
     """
-    Komprimiert ein Bild mit der Singulärwertzerlegung (SVD).
+    Komprimiert ein Bild mit der Singulärwertzerlegung (SVD) und gibt verbesserte Statistiken aus.
 
     :param image: Pfad zum Bild.
     :param k: Anzahl der verwendeten Singulärwerte.
     """
-    # 1. Laden des Bildes und Anzeige mit Matplotlib
-    img = cv2.cvtColor(cv2.imread(image), cv2.COLOR_BGR2RGB)
+    # 1. Laden des Bildes
+    img = cv2.imread(image)
     if img is None:
         print("Error: Image not found. Please check the file path.")
         return
+
     cv2.imshow("Input Image", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    # Original image statistics
+    original_size = img.nbytes
+    print(f"Original Image Size: {original_size / 1024:.2f} KB")
+    print(f"Original Image Shape: {img.shape}")
+
     # 2. Farbraumaufteilung
     r, g, b = cv2.split(img)
+
+    # Stat variables
+    total_compressed_size = 0
+    total_features = 0
 
     def compress_channel(m, name):
         """
@@ -110,24 +122,44 @@ def compress_image(image, k):
         :param name: Name des Kanals (für Debugging).
         :return: Komprimierte Matrix.
         """
+        nonlocal total_compressed_size, total_features
+
         # 3. Skalieren und Zentrieren
         m_scaled = m / 255.0
-        mean_m = np.mean(m_scaled, axis=0)
-        m_centered = m_scaled - mean_m
+        mean_m = np.mean(m_scaled, axis=0)  # calculate the column-wise mean value
+        m_centered = m_scaled - mean_m  # center values around 0
 
         # 4. Singulärwertzerlegung
         U, Sigma, V_T = np.linalg.svd(m_centered, full_matrices=False)
 
         # 5. Trunkierung auf k Singulärwerte
-        U_k = U[:, :k]
-        Sigma_k = np.diag(Sigma[:k])
-        V_T_k = V_T[:k, :]
+        U_k = U[:, :k]  # truncate the rows
+        Sigma_k = np.diag(Sigma[:k])  # truncate the diagonal entries
+        V_T_k = V_T[:k, :]  # truncate the columns
+
+        # Calculate compressed size
+        compressed_size = (
+                U_k.astype(np.float32).nbytes +  # Convert U_k to float32
+                Sigma_k.astype(np.float32).diagonal().nbytes +  # Store Sigma as vector
+                V_T_k.astype(np.float32).nbytes  # Convert V_T_k to float32
+        )
+        # total size of truncated matrices
+        total_compressed_size += compressed_size
+        total_features += k
+
+        print(f"Channel '{name}':")
+        print(f"  Original Shape: M: {m.shape} U: {U.shape} Sigma: {Sigma.shape}, V: {V_T.shape}")
+
+        print(f"  Compressed Shape: U: {U_k.shape}, Σ: {Sigma_k.shape}, V_T: {V_T_k.shape}")
+        print(f"  Singular Values Retained: {k}")
+        print(f"  Compressed Size: {compressed_size / 1024:.2f} KB")
 
         # Rekonstruktion der k-trunkierten Matrix
         A_k = U_k @ Sigma_k @ V_T_k
 
         # 7. Rückgängigmachen der Zentrierung
         m_result = A_k + mean_m
+        m_result = np.clip(m_result, 0, 1)
         return m_result
 
     # Komprimierung der Farbkanäle
@@ -137,6 +169,12 @@ def compress_image(image, k):
 
     # 8. Zusammenfügen der komprimierten Farbkanäle
     reduced_img = cv2.merge((reduced_r, reduced_g, reduced_b))
+
+    # Final statistics
+    print(f"Total Compressed Size (all channels): {total_compressed_size / 1024:.2f} KB")
+    compression_ratio = original_size / total_compressed_size
+    print(f"Compression Ratio: {compression_ratio:.2f}")
+    print(f"Total Features Retained: {total_features}")
 
     # 9. Anzeige des Original- und komprimierten Bildes
     plt.figure(figsize=(10, 5))
@@ -153,10 +191,11 @@ def compress_image(image, k):
     plt.tight_layout()
     plt.savefig("comparison.png")
     plt.show()
+
     return img, reduced_img
 
 
 if __name__ == '__main__':
     # Blatt 5 - Aufgabe 4
-    original, compressed = compress_image("unidach.jpg", 20)
-    x_star, nullraum_basis = aufgabe_2()
+    original, compressed = compress_image("Gradient_Shapes.webp", 40)
+    #x_star, nullraum_basis = aufgabe_2()
