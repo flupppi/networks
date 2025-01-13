@@ -135,23 +135,6 @@ def construct_system(n):
     return A, b
 
 
-def direct_solver(A, b):
-    """
-    Solves the linear system Ax = b using a direct solver.
-
-    Parameters:
-    - A (ndarray): Coefficient matrix of size n x n.
-    - b (ndarray): Right-hand side vector of size n.
-
-    Returns:
-    - x (ndarray): Solution vector of size n.
-
-    Notes:
-    - This function uses scipy's `solve` function, which is highly efficient
-      and leverages LU decomposition internally.
-    """
-    return solve(A, b)
-
 
 def is_diagonally_dominant(A):
     """
@@ -230,25 +213,63 @@ def plot_iterates(residuals, method_name, n):
 
 if __name__ == '__main__':
     #%% Part 1: Solve a small system to test Jacobi and Gauss-Seidel methods
-    # Define a 4x4 test matrix A and vector b
-    A = np.array([[4, -1, 0, 0],
-                  [-1, 4, -1, 0],
-                  [0, -1, 4, -1],
-                  [0, 0, -1, 3]])  # Coefficient matrix
-    b = np.array([15, 10, 10, 10])  # Right-hand side vector
-    x0 = np.ones_like(b)  # Initial guess for the solution
+    test_cases = [
+        {
+            "name": "Diagonally Dominant",
+            "A": np.array([[4, -1, 0, 0],
+                           [-1, 4, -1, 0],
+                           [0, -1, 4, -1],
+                           [0, 0, -1, 3]]),
+            "b": np.array([15, 10, 10, 10]),
+            "x0": np.ones(4)
+        },
+        {
+            "name": "Symmetric Positive Definite",
+            "A": np.array([[10, 2, 1],
+                           [2, 8, 1],
+                           [1, 1, 5]]),
+            "b": np.array([7, 8, 6]),
+            "x0": np.zeros(3)
+        },
+        {
+            "name": "Non-Diagonally Dominant",
+            "A": np.array([[2, 1, 1],
+                           [1, 3, 2],
+                           [1, 2, 4]]),
+            "b": np.array([5, 6, 10]),
+            "x0": np.zeros(3)
+        },
+        {
+            "name": "Ill-Conditioned Matrix",
+            "A": np.array([[1, 0.99, 0.98],
+                           [0.99, 1, 0.99],
+                           [0.98, 0.99, 1]]),
+            "b": np.array([2.97, 2.97, 2.97]),
+            "x0": np.zeros(3)
+        }
+    ]
 
-    # Solve using the Jacobi method
-    x_jacobi, jacobi_iterates, jacobi_iters, jacobi_time = jacobi_lgs(A, b, x0)
-    print(f"Jacobi solution: {x_jacobi}")  # Print the final solution
-    print(f"Jacobi iterations: {jacobi_iters}")  # Number of iterations required
-    print(f"Jacobi time: {jacobi_time:.6f} seconds")  # Time taken to solve
+    for case in test_cases:
+        print(f"\nTest Case: {case['name']}")
+        A, b, x0 = case["A"], case["b"], case["x0"]
 
-    # Solve using the Gauss-Seidel method
-    x_gs, gs_iterates, gs_iters, gs_time = gauss_seidel_lgs(A, b, x0)
-    print(f"Gauss-Seidel solution: {x_gs}")  # Print the final solution
-    print(f"Gauss-Seidel iterations: {gs_iters}")  # Number of iterations required
-    print(f"Gauss-Seidel time: {gs_time:.6f} seconds")  # Time taken to solve
+        # Jacobi Method
+        try:
+            x_jacobi, jacobi_iterates, jacobi_iters, jacobi_time = jacobi_lgs(A, b, x0)
+            print(f"Jacobi solution: {x_jacobi}")
+            print(f"Jacobi iterations: {jacobi_iters}")
+            print(f"Jacobi time: {jacobi_time:.6f} seconds")
+        except ValueError as e:
+            print(f"Jacobi method failed: {e}")
+
+        # Gauss-Seidel Method
+        try:
+            x_gs, gs_iterates, gs_iters, gs_time = gauss_seidel_lgs(A, b, x0)
+            print(f"Gauss-Seidel solution: {x_gs}")
+            print(f"Gauss-Seidel iterations: {gs_iters}")
+            print(f"Gauss-Seidel time: {gs_time:.6f} seconds")
+        except ValueError as e:
+            print(f"Gauss-Seidel method failed: {e}")
 
     #%% Part 2: Compare performance for increasing system sizes
     n_values = [16, 32, 64, 128, 256, 512]  # System sizes to test
@@ -273,7 +294,7 @@ if __name__ == '__main__':
 
         # Measure runtime of the direct solver
         start = time.time()
-        direct_solver(A, b)
+        solve(A, b)
         direct_times.append(time.time() - start)
 
     # Plot runtime comparison
