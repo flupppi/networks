@@ -207,6 +207,7 @@ def plot_iterates(residuals, method_name, n):
     plt.title(f"Convergence of {method_name}")
     plt.legend()
     plt.grid(True)
+    plt.savefig(f"{method_name}_convergence.png")
     plt.show()
 
 
@@ -306,6 +307,7 @@ if __name__ == '__main__':
     plt.title("Runtime Comparison")
     plt.legend()
     plt.grid(True)
+    plt.savefig("runtime_comparison.png")
     plt.show()
 
     #%% Bonus Task: Analyze Residual Convergence and Matrix Properties
