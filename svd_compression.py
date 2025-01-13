@@ -139,9 +139,9 @@ def compress_image(image, k):
 
         # Calculate compressed size
         compressed_size = (
-                U_k.astype(np.float32).nbytes +  # Convert U_k to float32
-                Sigma_k.astype(np.float32).diagonal().nbytes +  # Store Sigma as vector
-                V_T_k.astype(np.float32).nbytes  # Convert V_T_k to float32
+                U_k.astype(np.float16).nbytes +  # Convert U_k to float32
+                Sigma_k.astype(np.float16).diagonal().nbytes +  # Store Sigma as vector
+                V_T_k.astype(np.float16).nbytes  # Convert V_T_k to float32
         )
         # total size of truncated matrices
         total_compressed_size += compressed_size
@@ -197,5 +197,5 @@ def compress_image(image, k):
 
 if __name__ == '__main__':
     # Blatt 5 - Aufgabe 4
-    original, compressed = compress_image("Gradient_Shapes.webp", 40)
+    original, compressed = compress_image("unidach.jpg", 20)
     #x_star, nullraum_basis = aufgabe_2()
