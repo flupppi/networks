@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "networks"
+  site-url: "https://flupppi.github.io/networks"
+  description: "python code for networks course"
+  repo-branch: main
+  repo-url: "https://github.com/flupppi/networks"
