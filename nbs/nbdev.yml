@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "EiPy"
+  site-url: "https://flupppi.github.io/EiPy"
+  description: "network analysis and numerics course materials"
+  repo-branch: main
+  repo-url: "https://github.com/flupppi/EiPy"

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "numerics"
+name="EiPy"
 version = "0.1.0"
 description = ""
 authors = ["flupppi <felix.kalchschmid@uni-konstanz.de>"]
