@@ -5,4 +5,6 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://flupppi.github.io',
                 'git_url': 'https://github.com/flupppi/networks',
                 'lib_path': 'networks'},
-  'syms': {'networks.core': {'networks.core.foo': ('core.html#foo', 'networks/core.py')}}}
+  'syms': { 'networks.core': {'networks.core.foo': ('core.html#foo', 'networks/core.py')},
+            'networks.networkanalysis': {},
+            'networks.plotsine': {'networks.plotsine.plot_sine': ('plotsine.html#plot_sine', 'networks/plotsine.py')}}}
