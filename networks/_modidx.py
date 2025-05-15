@@ -28,4 +28,6 @@ d = { 'settings': { 'branch': 'main',
                                                                                              'networks/networkanalysis.py'),
                                           'networks.networkanalysis.update_graph': ( 'network_analysis.html#update_graph',
                                                                                      'networks/networkanalysis.py')},
+            'networks.networks03': { 'networks.networks03.plot_linregress_comparison': ( 'network_analysis.html#plot_linregress_comparison',
+                                                                                         'networks/networks03.py')},
             'networks.plotsine': {'networks.plotsine.plot_sine': ('plotsine.html#plot_sine', 'networks/plotsine.py')}}}
