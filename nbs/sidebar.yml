@@ -6,3 +6,4 @@ website:
       - 01_plotsine.ipynb
       - 03_abgabe_blatt_3_kalchschmid_wenzler.ipynb
       - 04_network_analysis.ipynb
+      - 05_network_analysis.ipynb
