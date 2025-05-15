@@ -1,0 +1,82 @@
+[
+  {
+    "objectID": "abgabe_blatt_3_kalchschmid_wenzler.html",
+    "href": "abgabe_blatt_3_kalchschmid_wenzler.html",
+    "title": "Abgabe 03 Numerics",
+    "section": "",
+    "text": "#!/usr/bin/env python3\nimport numpy as np\nfrom scipy.linalg import solve_triangular, lu\n\nNumerische Mathematik - Abgabe Blatt Nr. 03\nTutor(-in): Samuel Inca Pilco\nFelix Kalchschmid, Leon Wenzler\n\nsource\n\ntrisolve\n\n trisolve (M:numpy.ndarray, b:&lt;built-infunctionarray&gt;,\n           threshold:float=1e-08)\n\n*Solves either a lower or upper triangular system of Mx = b. This is a minimized version of the trisolve function we submitted last sheet.\n:param A: triangular input matrix :param b: input vector of same size :return: solution vector x*\n\nsource\n\n\ngauss_decomposition_pivot\n\n gauss_decomposition_pivot (A:numpy.ndarray, threshold:float=1e-08)\n\n*Performs the full Gauss elimination algorithm using scaling and pivoting. Implements algorithm 2.5 from the lecture script, with optimizations where possible by replacing loops with vectorized operations.\n:param threshold: :param A: quadratic input matrix :return: scaling D, permutation P, lower triangular L, and upper triangular U matrices*\n\nsource\n\n\ngauss_elimination_pivot\n\n gauss_elimination_pivot (A:numpy.ndarray, b:numpy.ndarray,\n                          threshold:float=1e-08)\n\n*Uses the LU-decomposition with pivoting from gauss_decomposition_pivot to retrieve P, L, U. Then, solves the equation systems \\(Ly = Pb\\) and \\(Ux = y\\) to obtain the solutionv vector x.\n:param A: quadratic input matrix :param b: input vector of same size :return: solution vector x*\n\nsource\n\n\nsolve_linear_system\n\n solve_linear_system (M:numpy.ndarray, b:numpy.ndarray)\n\n*Solves a linear system Mx = b using NumPy’s built-in solver.\n:param M: Coefficient matrix :param b: Right-hand side vector :return: Solution vector x*\n\nsource\n\n\ncalculate_condition_numbers\n\n calculate_condition_numbers (M:numpy.ndarray)\n\n*Calculates and returns the Frobenius and 2-norm condition numbers of the matrix M.\n:param M: Input matrix :return: Frobenius and 2-norm condition numbers*\n\nsource\n\n\nlu_decomposition_solution\n\n lu_decomposition_solution (M:numpy.ndarray, b:numpy.ndarray)\n\n*Solves a linear system Mx = b using LU decomposition and forward/backward substitution.\n:param M: Coefficient matrix :param b: Right-hand side vector :return: Solution vector x*\n\nsource\n\n\ncompare_solutions\n\n compare_solutions (M:numpy.ndarray, b:numpy.ndarray)\n\n*Compares solutions obtained from direct solve and LU decomposition.\n:param M: Coefficient matrix :param b: Right-hand side vector*",
+    "crumbs": [
+      "Abgabe 03 Numerics"
+    ]
+  },
+  {
+    "objectID": "plotsine.html",
+    "href": "plotsine.html",
+    "title": "plotsine",
+    "section": "",
+    "text": "It’s simple to plot a graph in python. A great library for this task is matplotlib. We also need numpy for representing the numerical values that make up our graph.\nTest\nHere we define a sine function plotted using matplotlib\n\nsource\n\nplot_sine\n\n plot_sine (n)\n\nplot a sinus function\nWe set a number of samples that are generated and plot the function using the entries resulting from this.",
+    "crumbs": [
+      "plotsine"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()\n\n\nsource\n\n\nfoo\n\n foo ()",
+    "crumbs": [
+      "core"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "networks",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "networks",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall networks in Development mode\n# make sure networks package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to networks\n$ nbdev_prepare",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "networks",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/flupppi/networks.git\nor from conda\n$ conda install -c flupppi networks\nor from pypi\n$ pip install networks\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "networks",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "04_network_analysis.html",
+    "href": "04_network_analysis.html",
+    "title": "networks",
+    "section": "",
+    "text": "Number of nodes\n\nsource\n\ngenerate_random_tree\n\n generate_random_tree (num_nodes, seed=None)\n\n\n# Generate three types of trees\nline_tree = nx.path_graph(n)  # Line/tree path\nstar_tree = nx.star_graph(n - 1)  # Center node 0, all others connect to it\nrandom_tree = generate_random_tree(n, seed=42)  # Random tree\n\n\nsource\n\n\ndraw_trees\n\n draw_trees (trees, titles)\n\n\n# Draw the trees\ndraw_trees([line_tree, star_tree, random_tree], [\"Line Tree\", \"Star Tree\", \"Random Tree\"])\n\n\n\n\n\n\n\n\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n\n# Settings\nn_max = 300\nk_bar = 1.2\n\nfor n in range(10, n_max, 10):\n    m = int((k_bar * n) / 2)\n    G = nx.gnm_random_graph(n, m)\n\n    # Get the size of the largest component\n    largest_cc = max(nx.connected_components(G), key=len)\n    G_sub = G.subgraph(largest_cc)\n\n    # Plot largest component only\n    plt.figure(figsize=(5, 5))\n    pos = nx.spring_layout(G_sub)\n    nx.draw(G_sub, pos, node_color='lightblue', with_labels=False, node_size=30)\n    plt.title(f'n = {n}, k̄ = {k_bar}, giant component size = {len(G_sub)}')\n    plt.axis('off')\n    plt.show()\n\n\n\n\n#\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.optimize import fsolve\n\n\nsource\n\n\ngiant_component_size\n\n giant_component_size (k)\n\n\nk_vals = np.linspace(0, 3, 300)\nS_vals = [giant_component_size(k) for k in k_vals]\n\nplt.figure(figsize=(8, 5))\nplt.plot(k_vals, S_vals, label='Size of giant component $S$')\nplt.axvline(1, color='red', linestyle='--', label='Phase transition at $\\\\langle k \\\\rangle = 1$')\nplt.xlabel('Average degree $\\\\langle k \\\\rangle$')\nplt.ylabel('Giant component size $S$ (fraction of nodes)')\nplt.title('Emergence of the Giant Component')\nplt.grid(True)\nplt.legend()\nplt.show()\n\n/tmp/ipykernel_193901/2603444820.py:7: RuntimeWarning: The iteration is not making good progress, as measured by the \n improvement from the last ten iterations.\n  S_solution, = fsolve(func, S_guess)\n\n\n\n\n\n\n\n\n\n\nsource\n\n\ngiant_component_size\n\n giant_component_size (k)\n\n\nsource\n\n\nupdate_graph\n\n update_graph (n=100, k_bar=0.5)",
+    "crumbs": [
+      "04_network_analysis.html"
+    ]
+  }
+]
