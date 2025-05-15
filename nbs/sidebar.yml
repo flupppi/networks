@@ -1,0 +1,8 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_core.ipynb
+      - 01_plotsine.ipynb
+      - 03_abgabe_blatt_3_kalchschmid_wenzler.ipynb
+      - 04_network_analysis.ipynb
