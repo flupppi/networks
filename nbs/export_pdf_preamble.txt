@@ -1,0 +1,10 @@
+---
+title: "Network Analysis Exercise 3"
+format:
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    colorlinks: true
+    pagesize: a4
+---
