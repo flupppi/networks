@@ -1,0 +1,182 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "networks",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "networks",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall networks in Development mode\n# make sure networks package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to networks\n$ nbdev_prepare",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "networks",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/flupppi/networks.git\nor from conda\n$ conda install -c flupppi networks\nor from pypi\n$ pip install networks\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "networks",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2",
+    "crumbs": [
+      "networks"
+    ]
+  },
+  {
+    "objectID": "abgabe_blatt_3_kalchschmid_wenzler.html",
+    "href": "abgabe_blatt_3_kalchschmid_wenzler.html",
+    "title": "Abgabe 03 Numerics",
+    "section": "",
+    "text": "#!/usr/bin/env python3\nimport numpy as np\nfrom scipy.linalg import solve_triangular, lu\n\nNumerische Mathematik - Abgabe Blatt Nr. 03\nTutor(-in): Samuel Inca Pilco\nFelix Kalchschmid, Leon Wenzler\n\nsource\n\ntrisolve\n\n trisolve (M:numpy.ndarray, b:&lt;built-infunctionarray&gt;,\n           threshold:float=1e-08)\n\n*Solves either a lower or upper triangular system of Mx = b. This is a minimized version of the trisolve function we submitted last sheet.\n:param A: triangular input matrix :param b: input vector of same size :return: solution vector x*\n\nsource\n\n\ngauss_decomposition_pivot\n\n gauss_decomposition_pivot (A:numpy.ndarray, threshold:float=1e-08)\n\n*Performs the full Gauss elimination algorithm using scaling and pivoting. Implements algorithm 2.5 from the lecture script, with optimizations where possible by replacing loops with vectorized operations.\n:param threshold: :param A: quadratic input matrix :return: scaling D, permutation P, lower triangular L, and upper triangular U matrices*\n\nsource\n\n\ngauss_elimination_pivot\n\n gauss_elimination_pivot (A:numpy.ndarray, b:numpy.ndarray,\n                          threshold:float=1e-08)\n\n*Uses the LU-decomposition with pivoting from gauss_decomposition_pivot to retrieve P, L, U. Then, solves the equation systems \\(Ly = Pb\\) and \\(Ux = y\\) to obtain the solutionv vector x.\n:param A: quadratic input matrix :param b: input vector of same size :return: solution vector x*\n\nsource\n\n\nsolve_linear_system\n\n solve_linear_system (M:numpy.ndarray, b:numpy.ndarray)\n\n*Solves a linear system Mx = b using NumPy’s built-in solver.\n:param M: Coefficient matrix :param b: Right-hand side vector :return: Solution vector x*\n\nsource\n\n\ncalculate_condition_numbers\n\n calculate_condition_numbers (M:numpy.ndarray)\n\n*Calculates and returns the Frobenius and 2-norm condition numbers of the matrix M.\n:param M: Input matrix :return: Frobenius and 2-norm condition numbers*\n\nsource\n\n\nlu_decomposition_solution\n\n lu_decomposition_solution (M:numpy.ndarray, b:numpy.ndarray)\n\n*Solves a linear system Mx = b using LU decomposition and forward/backward substitution.\n:param M: Coefficient matrix :param b: Right-hand side vector :return: Solution vector x*\n\nsource\n\n\ncompare_solutions\n\n compare_solutions (M:numpy.ndarray, b:numpy.ndarray)\n\n*Compares solutions obtained from direct solve and LU decomposition.\n:param M: Coefficient matrix :param b: Right-hand side vector*",
+    "crumbs": [
+      "Abgabe 03 Numerics"
+    ]
+  },
+  {
+    "objectID": "network_analysis_exercise_03.html",
+    "href": "network_analysis_exercise_03.html",
+    "title": "Network Analysis Exercise 3",
+    "section": "",
+    "text": "(2 points) The tables show function values for functions \\(f(x)\\) and \\(g(x)\\) on different values of \\(x\\). Plot the function values in a way that allows you to determine if any of the functions exhibits power-law behavior. If yes, determine the exponent.\n\n\n\n\\(x\\)\n\\(f(x)\\)\n\n\n\n\n5.00\n252822.43\n\n\n7.50\n84599.77\n\n\n11.25\n28308.89\n\n\n16.88\n9472.76\n\n\n25.31\n3169.79\n\n\n37.97\n1060.68\n\n\n56.95\n354.93\n\n\n85.43\n118.77\n\n\n128.14\n39.74\n\n\n192.22\n13.30\n\n\n\n\n\n\n\\(x\\)\n\\(g(x)\\)\n\n\n\n\n3.00\n5824779.30\n\n\n5.10\n1185913.90\n\n\n8.67\n347172.77\n\n\n14.74\n114200.30\n\n\n25.06\n40746.59\n\n\n42.60\n17235.83\n\n\n72.41\n69248.85\n\n\n123.10\n384.66\n\n\n209.27\n10.41\n\n\n355.76\n0.13\n\n\n\n\n\nTo provide a solution to the exercise: Provide your plot, report your judgment on power-law behavior and in case the exponent.\nData plotted for \\(f(x)\\) and \\(g(x)\\):\n\n\n\n\n\n\n\n\n\nPower law is defined with \\(P_k = Ck^\\alpha\\).\nValues for alpha are often in the range 2-3 and taking the log of function and argument leads to a linear relation, visible as a diagonal straight line in a log-log plot.\n\n\n\n\n\n\n\n\n\nThis can be seen here where we have a straight line for \\(f(x)\\) but not for \\(g(x)\\) which suggests that we only have a power-law for \\(f(x)\\). But the lecture notes, that looking at the diagram alone might be deceiving. In particular, if the data is incomplete. True power law should be monotonically decreasing and node degree might deviate for small k.\nSo to validate this further, we can show that a function has power law behavior if it satisfies \\[f(x) \\sim x^{-\\alpha}\\] \\[f(x) = C \\cdot x^\\alpha\\] So taking logarithms gives us a linear relationship: \\[\\log(f(x)) = -\\alpha \\cdot \\log(x) + \\log(C)\\] We can estimate the exponent \\(\\alpha\\) using linear regression on the log-transformed data.\n\nsource\n\n\n\n\n plot_linregress_comparison (x, y, name, ax)\n\n\n\nEstimated power-law exponent f(x): α ≈ 2.70\nR-squared f(x): 1.000000\nEstimated power-law exponent g(x): α ≈ 3.16\nR-squared g(x): 0.850754\n\n\n\n\n\n\n\n\n\nThe estimated slope from the regression of \\(f(x)\\) is -\\(\\alpha\\), giving us \\(\\alpha \\approx 2.70\\)\nThe \\(R^2\\) value of the regression is \\(1.0\\), indicating a strong fit.\nFor \\(g(x)\\) we see that it does not follow a clear power-law pattern based on the regression and the low \\(R^2\\) value.",
+    "crumbs": [
+      "Network Analysis Exercise 3"
+    ]
+  },
+  {
+    "objectID": "network_analysis_exercise_03.html#power-law-behaviour",
+    "href": "network_analysis_exercise_03.html#power-law-behaviour",
+    "title": "Network Analysis Exercise 3",
+    "section": "",
+    "text": "(2 points) The tables show function values for functions \\(f(x)\\) and \\(g(x)\\) on different values of \\(x\\). Plot the function values in a way that allows you to determine if any of the functions exhibits power-law behavior. If yes, determine the exponent.\n\n\n\n\\(x\\)\n\\(f(x)\\)\n\n\n\n\n5.00\n252822.43\n\n\n7.50\n84599.77\n\n\n11.25\n28308.89\n\n\n16.88\n9472.76\n\n\n25.31\n3169.79\n\n\n37.97\n1060.68\n\n\n56.95\n354.93\n\n\n85.43\n118.77\n\n\n128.14\n39.74\n\n\n192.22\n13.30\n\n\n\n\n\n\n\\(x\\)\n\\(g(x)\\)\n\n\n\n\n3.00\n5824779.30\n\n\n5.10\n1185913.90\n\n\n8.67\n347172.77\n\n\n14.74\n114200.30\n\n\n25.06\n40746.59\n\n\n42.60\n17235.83\n\n\n72.41\n69248.85\n\n\n123.10\n384.66\n\n\n209.27\n10.41\n\n\n355.76\n0.13\n\n\n\n\n\nTo provide a solution to the exercise: Provide your plot, report your judgment on power-law behavior and in case the exponent.\nData plotted for \\(f(x)\\) and \\(g(x)\\):\n\n\n\n\n\n\n\n\n\nPower law is defined with \\(P_k = Ck^\\alpha\\).\nValues for alpha are often in the range 2-3 and taking the log of function and argument leads to a linear relation, visible as a diagonal straight line in a log-log plot.\n\n\n\n\n\n\n\n\n\nThis can be seen here where we have a straight line for \\(f(x)\\) but not for \\(g(x)\\) which suggests that we only have a power-law for \\(f(x)\\). But the lecture notes, that looking at the diagram alone might be deceiving. In particular, if the data is incomplete. True power law should be monotonically decreasing and node degree might deviate for small k.\nSo to validate this further, we can show that a function has power law behavior if it satisfies \\[f(x) \\sim x^{-\\alpha}\\] \\[f(x) = C \\cdot x^\\alpha\\] So taking logarithms gives us a linear relationship: \\[\\log(f(x)) = -\\alpha \\cdot \\log(x) + \\log(C)\\] We can estimate the exponent \\(\\alpha\\) using linear regression on the log-transformed data.\n\nsource\n\n\n\n\n plot_linregress_comparison (x, y, name, ax)\n\n\n\nEstimated power-law exponent f(x): α ≈ 2.70\nR-squared f(x): 1.000000\nEstimated power-law exponent g(x): α ≈ 3.16\nR-squared g(x): 0.850754\n\n\n\n\n\n\n\n\n\nThe estimated slope from the regression of \\(f(x)\\) is -\\(\\alpha\\), giving us \\(\\alpha \\approx 2.70\\)\nThe \\(R^2\\) value of the regression is \\(1.0\\), indicating a strong fit.\nFor \\(g(x)\\) we see that it does not follow a clear power-law pattern based on the regression and the low \\(R^2\\) value.",
+    "crumbs": [
+      "Network Analysis Exercise 3"
+    ]
+  },
+  {
+    "objectID": "network_analysis_exercise_03.html#categorizing-networks",
+    "href": "network_analysis_exercise_03.html#categorizing-networks",
+    "title": "Network Analysis Exercise 3",
+    "section": "2) Categorizing Networks",
+    "text": "2) Categorizing Networks\n(2 points) In the lecture we discussed a simple way to quantify assortativity and to assign a network into one of the three categories by fitting a power function to the degree correlation \\(\\bar k_{nn}(k)\\). Try this approach for the networks As3G1.txt and As3G2.txt in Ilias and report your results. Note this correlation is implemented (e.g. in networkx as average_degree_connectivity) A more formally sound version is to simply use the Pearson correlation coefficient \\(r\\) of the degrees at either ends of the graph’s edges. As it is normalized, it lies between \\(-1≤r≤1\\) and can be interpreted the same way as our correlation exponent. \\[r = \\frac{1}{\\sigma^2_q}\\sum_{jk}jk(e_{jk}-q_jq_k)\\] with \\(\\sigma_q^2\\) being the variance of excess degree distribution \\(q(k)\\). Luckily, this measure is also already implemented in many analysis tools (e.g. networkx as degree_pearson_correlation_coefficient). Apply the method on the network, report your result and compare to the finding for the first method. Then run a number (e.g. 10) of degree sequence preserving randomization and report if/which changes occur to the second measure.\n\nSolution\nTo provide a solution to the exercise: Provide the diagram for the fitting, and your correlation exponent, the result for pearson correlation for the original and randomised networks.\nThe networks are stored as edge lists. As3G2 additionally has edge weights. So first we need to load them:\n\nG1 = nx.read_adjlist(\"../data/As3G1.txt\", nodetype=int)\nprint(len(G1.edges))\nprint(len(G1.nodes))\nG2 = nx.Graph()\nwith open(\"../data/As3G2.txt\") as f:\n    for line in f:\n        a, b, attr = line.strip().split(maxsplit=2)\n        G2.add_edge(a, b, **ast.literal_eval(attr))\nprint(len(G2.edges))\nprint(len(G2.nodes))\n\n565\n430\n254\n77\n\n\nTo quantify the assortativity of the network we solve \\(\\bar k_{nn} = ak^\\mu\\) for the correlation exponent \\(\\mu\\) and categorize it. * \\(μ&gt;0\\): assortative (high-degree nodes link to high-degree) * \\(μ&lt;0\\): disassortative * \\(μ≈0\\): neutral\n\nsource\n\n\npower_law\n\n power_law (x, a, b)\n\nWe compute the average degree connectivity and get a dictionary keyed by degree k with the value of average connectivity.\nWe can fit a line on these values to get an estimation of our correlation exponent.\n\nsource\n\n\nfit_degree_connectivity\n\n fit_degree_connectivity (graph, title)\n\n\nsource\n\n\ncategorize_assortativity\n\n categorize_assortativity (mu, name)\n\n\nmu_G1 = fit_degree_connectivity(G1, \"G1: Degree Correlation Fit\")\n\nmu_G2 = fit_degree_connectivity(G2, \"G2: Degree Correlation Fit\")\ncategorize_assortativity(mu_G1, \"G1\")\n\ncategorize_assortativity(mu_G2, \"G2\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe calculated exponentv for G1: 0.523 shows a assortative degree correlation.\nThe calculated exponentv for G2: -0.145 shows a disassortative degree correlation.\n\n\nNext we should compare the average_degree_connectivity with the degree_pearson_correlation_coefficient results which returns the assortativity of graph by degree.\n\n# compare the results\npearson_G1 = nx.degree_pearson_correlation_coefficient(G1)\npearson_G2 = nx.degree_pearson_correlation_coefficient(G2)\n\nprint(f\"G1 Pearson: {pearson_G1:.4f}, G2 Pearson: {pearson_G2:.4f}\")\n\nG1 Pearson: 0.7332, G2 Pearson: -0.1652\n\n\nHere, \\(G1\\) is assortative and \\(G2\\) is disassortative.\nNext we should run 10 degree sequence preserving randomizations and show which changes occur in the second measure. We do this by swapping edges in the network.\n\nIf the randomized networks lose any assortativity, that suggests the observed structure is meaningful.\nIf the Pearson correlation stays similar → the degree sequence alone explains assortativity.\n\nIn the results we can see that for \\(G1\\) the assortativity clearly changes to negative or very small values suggesting that the structure is meaningful.\nFor \\(G1\\) there is no such change visible.\n\nsource\n\n\nrandomize_and_measure\n\n randomize_and_measure (graph, n_iter=10)\n\n\n\nRandomized Pearson G1: [0.004137654023765612, -0.0729776597452127, -0.05565167531120767, -0.10058177053837325, -0.011426365891527044, -0.027460243011809632, -0.036857387111609005, -0.046195799060784595, -0.09183068009543512, -0.03245247581482806]\nRandomized Pearson G2: [-0.197891215644392, -0.11538767953142574, -0.23489350233836423, -0.15175398942284535, -0.15909663068868046, -0.1306511227926893, -0.17175835066677408, -0.1566105395514292, -0.18083547412138914, -0.2259320110296678]",
+    "crumbs": [
+      "Network Analysis Exercise 3"
+    ]
+  },
+  {
+    "objectID": "network_analysis_exercise_03.html#finding-a-graph-with-certain-properties",
+    "href": "network_analysis_exercise_03.html#finding-a-graph-with-certain-properties",
+    "title": "Network Analysis Exercise 3",
+    "section": "3) Finding a graph with certain properties",
+    "text": "3) Finding a graph with certain properties\n(2 points) We discussed in the lecture that there are differing definitions for average (\\(C_G\\)) and global clustering coefficient (\\(C_{GG}\\)).\n\n\nGiven the double star graph family from Assignment 2.2, where we showed that both values diverge (\\(C_G \\rightarrow 1\\), \\(C_{GG} \\rightarrow 0\\)) for increasing \\(k\\) (periphery nodes): Can you find a graph family for which they approach the opposite values or at least go in the opposite direction compared to double star? In case, describe it and give the general formula for its clustering coefficients.\n\n\nWhat is the smallest graph you can find for which the two values differ?\n\n\n\nSolution\nTo provide a solution to the exercise: Provide the description, formula, and graph.\n\nIch hab keine ahnung wie ich das angehen sollte ausser das an Gpt zu senden.\n\nIn exercise 2.2 we looked at a network with two core nodes connected by an edge, and k peripheral nodes that each are connected exactly to the two core nodes (creating triangles): We observed the values for \\(C_G\\) and \\(C_{GG}\\) noting that for large \\(k\\), \\(C_G\\) was much larger than \\(C_{GG}\\).\nSo to flip it, we want: * Many connected triplets (to raise the denominator of \\(C_G\\)) * Few locally closed triangles for most nodes (to keep \\(C_G\\)) * But still many triangles in total (to raise numerator of \\(C_{GG}\\))\nWe define a graph family consisting of a clique of size \\(k\\) and \\(n−k\\) isolated nodes. The global clustering coefficient is always \\(C_{GG}=1\\), while the average local clustering coefficient is \\(C_G=\\frac{k}{n}\\), which goes to \\(0\\) as \\(n\\rightarrow\\infty\\)\nThis is the opposite of the double star graph family, where \\(C_G→1\\), but \\(C_{GG}→0\\).\n\nGlobal clustering \\(C_GG\\):\nThe clique has \\(\\begin{pmatrix}k\\\\3\\end{pmatrix}\\) triangles and \\(\\begin{pmatrix}k\\\\2\\end{pmatrix}\\cdot(k−2)\\) triplets.\nThe isolated nodes add nothing.\nSo: \\[C_{GG}=\\frac{3\\cdot\\begin{pmatrix}k\\\\3\\end{pmatrix}}{\\begin{pmatrix}k\\\\3\\end{pmatrix}\\cdot \\frac{k-2}{3}} = 1\\] (since it’s a clique → every triplet is closed → \\(C_{GG}=1\\))\nAverage local clustering \\(C_G\\):\nClique nodes have \\(C_v=1\\)\nIsolated nodes have \\(C_v=0\\)\nSo: \\[C_G=\\frac{k⋅1+(n−k)⋅0}{n}=\\frac{k}{n}\\]\n\\(→\\) goes to \\(0\\) as \\(n→∞\\) for fixed \\(k\\)\n\n\nsource\n\n\nclustered_core_with_isolates\n\n clustered_core_with_isolates (n=10, k=3)\n\nCreate a graph with a clique of size k and n-k isolated nodes.\n\n# Example graph with k=3 (clique) and n=10 (total nodes, 7 isolates)\nG = clustered_core_with_isolates(n=10, k=3)\nG1= clustered_core_with_isolates(n=15, k=6)",
+    "crumbs": [
+      "Network Analysis Exercise 3"
+    ]
+  },
+  {
+    "objectID": "network_analysis_exercise_03.html#giant-component",
+    "href": "network_analysis_exercise_03.html#giant-component",
+    "title": "Network Analysis Exercise 3",
+    "section": "4) Giant component",
+    "text": "4) Giant component\n(2 points) In the last lecture we discussed the growth of the giant component during the creation of a graph by the random model. Run an experiment with increasing values of the edge probability and report the development of the giant component size (relative to the number of nodes in the graph) in relation to the probability values.\n\nSolution\nTo provide a solution to the exercise: Provide a diagram that shows the development of the size over the range of probability values.\nFor \\(n = 1000\\) nodes and \\(100\\) values in the probability range from \\(p\\in[0, 0.01]\\), at each step we generate a random graph \\(G(n,p)\\) and compute the relative size of the largest connected component \\[\\frac{\\text{size of largest component}}{n}\\]\nWe plot the critical threshold for the emergence of the giant component in as approximately \\(p = \\frac{1}{n}\\)\n\nBelow the threshold, most components are small.\nAround the threshold, the large connected component suddenly grows.\nAbove the threshold, the giant component rapidly dominates the graph.",
+    "crumbs": [
+      "Network Analysis Exercise 3"
+    ]
+  },
+  {
+    "objectID": "network_analysis_exercise_03.html#rich-club",
+    "href": "network_analysis_exercise_03.html#rich-club",
+    "title": "Network Analysis Exercise 3",
+    "section": "5) Rich Club",
+    "text": "5) Rich Club\n(2 points) Select two networks from different categories of the SNAP Large Network Collection (https://snap.stanford.edu/data/index.html). Calculate the simple version of the rich club coefficient (\\(\\phi(k)\\) ) for each network and report it in a diagram as shown in the lecture. Then calculate the improved version \\(\\rho_{ran}(k)\\) and report the result.\n\nSolution\nTo provide a solution to the exercise: Shortly describe the networks, provide the diagrams and your verdict on rich club phenomenon.\nWhat is the formula for \\(\\phi (k)\\) and \\(\\rho_{ran} (k)\\).\nUse each formula to implement an algorithm solving this calculation and apply it to the graph. Alternately use a predefined algorithm if it is available and just\n\nNetworks Used\nWikipedia Vote Network (directed, but we make it undirected)\n\nNodes: 7,115\nEdges: 103,689\nDescription: Directed graph of Wikipedia users voting in admin elections. An edge from user A to B means A voted for B.\nSource: SNAP Wiki-Vote\n\nCalifornia road network (undirected)\n\nNodes: 1,965,206\nEdges: 2,766,607\nDescription: A road network of California. Intersections and endpoints are represented by nodes and the roads connecting these intersections or road endpoints are represented by undirected edges.\nSource: SNAP California Road\n\nEU Email Communication Network (sadly does not work because of self loops)\n\nNodes: 265,214\nEdges: 420,045\nDescription: Directed email exchange graph from a European research institution. An edge from A to B means A sent an email to B.\nSource: SNAP Email-EuAll\n\n\n\nRich Club\nThe rich club coefficient \\(φ(k)\\) measures the tendency of high-degree nodes (\\(degree &gt; k\\)) to be more densely interconnected than expected.\nSimple Rich-Club Coefficient: \\[ϕ(k)=\\frac{2E_k}{N_k(N_k−1)}\\]\nWhere:\n\n\\(N_k\\): number of nodes with degree &gt; kk\n\\(E_k\\): number of edges between those nodes\n\nNormalized Rich-Club Coefficient (Improved Version): \\[ρ(k)=\\frac{ϕ(k)}{ϕ_{rand}(k)}\\]\nWhere \\(ϕ_{rand}(k)\\) is the rich-club coefficient for a randomized version of the network with the same degree distribution.\nA value \\(ρ(k)&gt;1\\) indicates a rich club phenomenon.\n\n#Loading the graphs\n#G_email = nx.read_adjlist(\"../data/email-EuAll.txt\", nodetype=int, create_using=nx.DiGraph())\n#G_email = G_email.to_undirected()\nG_wiki = nx.read_adjlist(\"../data/Wiki-Vote.txt\", nodetype=int, create_using=nx.DiGraph())\nG_wiki = G_wiki.to_undirected()\n\n\nG_road = nx.read_adjlist(\"../data/roadNet-CA.txt\", nodetype=int)\n\n\nrich_road = nx.rich_club_coefficient(G_road, normalized=False)\n# doesnt work because it has self loops\n# rich_email = nx.rich_club_coefficient(G_email, normalized=False)\n\n\n# Simple rich-club coefficient\nrich_wiki = nx.rich_club_coefficient(G_wiki, normalized=False)\n\n\n# Normalized version\nrich_wiki_norm = nx.rich_club_coefficient(G_wiki, normalized=True, Q=10)\n\n\n# Normalized version\n#rich_road_norm = nx.rich_club_coefficient(G_norm, normalized=True, Q=10)\n# tooo slow, didnt finsih. I guess the Graph is just too large.",
+    "crumbs": [
+      "Network Analysis Exercise 3"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()\n\n\nsource\n\n\nfoo\n\n foo ()",
+    "crumbs": [
+      "core"
+    ]
+  },
+  {
+    "objectID": "network_analysis.html",
+    "href": "network_analysis.html",
+    "title": "Network Analysis",
+    "section": "",
+    "text": "We are using networkx but graphtools is faster so we try this later.\nThere is also a gpu version of networkx from nvdida that I would like to try later.\nNumber of nodes",
+    "crumbs": [
+      "Network Analysis"
+    ]
+  },
+  {
+    "objectID": "network_analysis.html#imports",
+    "href": "network_analysis.html#imports",
+    "title": "Network Analysis",
+    "section": "",
+    "text": "We are using networkx but graphtools is faster so we try this later.\nThere is also a gpu version of networkx from nvdida that I would like to try later.\nNumber of nodes",
+    "crumbs": [
+      "Network Analysis"
+    ]
+  },
+  {
+    "objectID": "network_analysis.html#exercise-1",
+    "href": "network_analysis.html#exercise-1",
+    "title": "Network Analysis",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nI didn’t do anything for the first exercise.",
+    "crumbs": [
+      "Network Analysis"
+    ]
+  },
+  {
+    "objectID": "network_analysis.html#exercise-2",
+    "href": "network_analysis.html#exercise-2",
+    "title": "Network Analysis",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nThere were 5 Tasks in the second exercise.\n\nTask 1\n\n\nTask 2\n\n\nTask 3\n\n\nTask 4\n\n\nTask 5",
+    "crumbs": [
+      "Network Analysis"
+    ]
+  },
+  {
+    "objectID": "network_analysis.html#exercise-3",
+    "href": "network_analysis.html#exercise-3",
+    "title": "Network Analysis",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nThere are 5 Tasks in the third exercise.\n\nTask 1\n\n\nTask 2\n\n\nTask 3\n\n\nTask 4\n\n\nTask 5\n\nsource\n\n\ngenerate_random_tree\n\n generate_random_tree (num_nodes, seed=None)\n\n\n# Generate three types of trees\nline_tree = nx.path_graph(n)  # Line/tree path\nstar_tree = nx.star_graph(n - 1)  # Center node 0, all others connect to it\nrandom_tree = generate_random_tree(n, seed=42)  # Random tree\n\n\nsource\n\n\ndraw_trees\n\n draw_trees (trees, titles)\n\n\n# Draw the trees\ndraw_trees([line_tree, star_tree, random_tree], [\"Line Tree\", \"Star Tree\", \"Random Tree\"])\n\n\n\n\n\n\n\n\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n\n# Settings\nn_max = 10\nk_bar = 1.2\n\nfor n in range(10, n_max, 10):\n    m = int((k_bar * n) / 2)\n    G = nx.gnm_random_graph(n, m)\n\n    # Get the size of the largest component\n    largest_cc = max(nx.connected_components(G), key=len)\n    G_sub = G.subgraph(largest_cc)\n\n    # Plot largest component only\n    plt.figure(figsize=(5, 5))\n    pos = nx.spring_layout(G_sub)\n    nx.draw(G_sub, pos, node_color='lightblue', with_labels=False, node_size=30)\n    plt.title(f'n = {n}, k̄ = {k_bar}, giant component size = {len(G_sub)}')\n    plt.axis('off')\n    plt.show()\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.optimize import fsolve\n\n\nsource\n\n\ngiant_component_size\n\n giant_component_size (k)\n\n\nk_vals = np.linspace(0, 3, 300)\nS_vals = [giant_component_size(k) for k in k_vals]\n\nplt.figure(figsize=(8, 5))\nplt.plot(k_vals, S_vals, label='Size of giant component $S$')\nplt.axvline(1, color='red', linestyle='--', label='Phase transition at $\\\\langle k \\\\rangle = 1$')\nplt.xlabel('Average degree $\\\\langle k \\\\rangle$')\nplt.ylabel('Giant component size $S$ (fraction of nodes)')\nplt.title('Emergence of the Giant Component')\nplt.grid(True)\nplt.legend()\nplt.show()\n\n/tmp/ipykernel_193901/2603444820.py:7: RuntimeWarning: The iteration is not making good progress, as measured by the \n improvement from the last ten iterations.\n  S_solution, = fsolve(func, S_guess)\n\n\n\n\n\n\n\n\n\n\nsource\n\n\ngiant_component_size\n\n giant_component_size (k)\n\n\nsource\n\n\nupdate_graph\n\n update_graph (n=100, k_bar=0.5)",
+    "crumbs": [
+      "Network Analysis"
+    ]
+  },
+  {
+    "objectID": "plotsine.html",
+    "href": "plotsine.html",
+    "title": "plotsine",
+    "section": "",
+    "text": "It’s simple to plot a graph in python. A great library for this task is matplotlib. We also need numpy for representing the numerical values that make up our graph.\nTest\nHere we define a sine function plotted using matplotlib\n\nsource\n\nplot_sine\n\n plot_sine (n)\n\nplot a sinus function\nWe set a number of samples that are generated and plot the function using the entries resulting from this.",
+    "crumbs": [
+      "plotsine"
+    ]
+  }
+]

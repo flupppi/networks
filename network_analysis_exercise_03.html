@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Network Analysis Exercise 3 – networks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fe8f458f31a467b51aeabd2275c1e88a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Network Analysis Exercise 3 – networks">
+<meta property="og:description" content="python code for networks course">
+<meta property="og:image" content="https://flupppi.github.io/networks/05_network_analysis_exercise_03_files/figure-html/cell-2-output-1.png">
+<meta property="og:site_name" content="networks">
+<meta property="og:image:height" content="411">
+<meta property="og:image:width" content="811">
+<meta name="twitter:title" content="Network Analysis Exercise 3 – networks">
+<meta name="twitter:description" content="python code for networks course">
+<meta name="twitter:image" content="https://flupppi.github.io/networks/05_network_analysis_exercise_03_files/figure-html/cell-2-output-1.png">
+<meta name="twitter:image-height" content="411">
+<meta name="twitter:image-width" content="811">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">networks</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./network_analysis_exercise_03.html">Network Analysis Exercise 3</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">networks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">core</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plotsine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">plotsine</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./abgabe_blatt_3_kalchschmid_wenzler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abgabe 03 Numerics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./network_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./network_analysis_exercise_03.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Network Analysis Exercise 3</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#power-law-behaviour" id="toc-power-law-behaviour" class="nav-link active" data-scroll-target="#power-law-behaviour">1) Power-law behaviour</a>
+  <ul class="collapse">
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  <li><a href="#plot_linregress_comparison" id="toc-plot_linregress_comparison" class="nav-link" data-scroll-target="#plot_linregress_comparison">plot_linregress_comparison</a></li>
+  </ul></li>
+  <li><a href="#categorizing-networks" id="toc-categorizing-networks" class="nav-link" data-scroll-target="#categorizing-networks">2) Categorizing Networks</a>
+  <ul class="collapse">
+  <li><a href="#solution-1" id="toc-solution-1" class="nav-link" data-scroll-target="#solution-1">Solution</a></li>
+  <li><a href="#power_law" id="toc-power_law" class="nav-link" data-scroll-target="#power_law">power_law</a></li>
+  <li><a href="#fit_degree_connectivity" id="toc-fit_degree_connectivity" class="nav-link" data-scroll-target="#fit_degree_connectivity">fit_degree_connectivity</a></li>
+  <li><a href="#categorize_assortativity" id="toc-categorize_assortativity" class="nav-link" data-scroll-target="#categorize_assortativity">categorize_assortativity</a></li>
+  <li><a href="#randomize_and_measure" id="toc-randomize_and_measure" class="nav-link" data-scroll-target="#randomize_and_measure">randomize_and_measure</a></li>
+  </ul></li>
+  <li><a href="#finding-a-graph-with-certain-properties" id="toc-finding-a-graph-with-certain-properties" class="nav-link" data-scroll-target="#finding-a-graph-with-certain-properties">3) Finding a graph with certain properties</a>
+  <ul class="collapse">
+  <li><a href="#solution-2" id="toc-solution-2" class="nav-link" data-scroll-target="#solution-2">Solution</a></li>
+  <li><a href="#clustered_core_with_isolates" id="toc-clustered_core_with_isolates" class="nav-link" data-scroll-target="#clustered_core_with_isolates">clustered_core_with_isolates</a></li>
+  </ul></li>
+  <li><a href="#giant-component" id="toc-giant-component" class="nav-link" data-scroll-target="#giant-component">4) Giant component</a>
+  <ul class="collapse">
+  <li><a href="#solution-3" id="toc-solution-3" class="nav-link" data-scroll-target="#solution-3">Solution</a></li>
+  </ul></li>
+  <li><a href="#rich-club" id="toc-rich-club" class="nav-link" data-scroll-target="#rich-club">5) Rich Club</a>
+  <ul class="collapse">
+  <li><a href="#solution-4" id="toc-solution-4" class="nav-link" data-scroll-target="#solution-4">Solution</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/flupppi/networks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="network_analysis_exercise_03.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Network Analysis Exercise 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="power-law-behaviour" class="level2">
+<h2 class="anchored" data-anchor-id="power-law-behaviour">1) Power-law behaviour</h2>
+<p>(2 points) The tables show function values for functions <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> on different values of <span class="math inline">\(x\)</span>. Plot the function values in a way that allows you to determine if any of the functions exhibits power-law behavior. If yes, determine the exponent.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(f(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5.00</td>
+<td>252822.43</td>
+</tr>
+<tr class="even">
+<td>7.50</td>
+<td>84599.77</td>
+</tr>
+<tr class="odd">
+<td>11.25</td>
+<td>28308.89</td>
+</tr>
+<tr class="even">
+<td>16.88</td>
+<td>9472.76</td>
+</tr>
+<tr class="odd">
+<td>25.31</td>
+<td>3169.79</td>
+</tr>
+<tr class="even">
+<td>37.97</td>
+<td>1060.68</td>
+</tr>
+<tr class="odd">
+<td>56.95</td>
+<td>354.93</td>
+</tr>
+<tr class="even">
+<td>85.43</td>
+<td>118.77</td>
+</tr>
+<tr class="odd">
+<td>128.14</td>
+<td>39.74</td>
+</tr>
+<tr class="even">
+<td>192.22</td>
+<td>13.30</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(g(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3.00</td>
+<td>5824779.30</td>
+</tr>
+<tr class="even">
+<td>5.10</td>
+<td>1185913.90</td>
+</tr>
+<tr class="odd">
+<td>8.67</td>
+<td>347172.77</td>
+</tr>
+<tr class="even">
+<td>14.74</td>
+<td>114200.30</td>
+</tr>
+<tr class="odd">
+<td>25.06</td>
+<td>40746.59</td>
+</tr>
+<tr class="even">
+<td>42.60</td>
+<td>17235.83</td>
+</tr>
+<tr class="odd">
+<td>72.41</td>
+<td>69248.85</td>
+</tr>
+<tr class="even">
+<td>123.10</td>
+<td>384.66</td>
+</tr>
+<tr class="odd">
+<td>209.27</td>
+<td>10.41</td>
+</tr>
+<tr class="even">
+<td>355.76</td>
+<td>0.13</td>
+</tr>
+</tbody>
+</table>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
+<p>To provide a solution to the exercise: Provide your plot, report your judgment on power-law behavior and in case the exponent.</p>
+<p>Data plotted for <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span>:</p>
+<div id="92ef0e97-dde9-4855-ae6d-3279f7bf846b" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Power law is defined with <span class="math inline">\(P_k = Ck^\alpha\)</span>.</p>
+<p>Values for alpha are often in the range 2-3 and taking the log of function and argument leads to a linear relation, visible as a diagonal straight line in a log-log plot.</p>
+<div id="9a9eb660-32ac-4fa6-9240-994d2b647aee" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This can be seen here where we have a straight line for <span class="math inline">\(f(x)\)</span> but not for <span class="math inline">\(g(x)\)</span> which suggests that we only have a power-law for <span class="math inline">\(f(x)\)</span>. But the lecture notes, that looking at the diagram alone might be deceiving. In particular, if the data is incomplete. True power law should be monotonically decreasing and node degree might deviate for small k.</p>
+<p>So to validate this further, we can show that a function has power law behavior if it satisfies <span class="math display">\[f(x) \sim x^{-\alpha}\]</span> <span class="math display">\[f(x) = C \cdot x^\alpha\]</span> So taking logarithms gives us a linear relationship: <span class="math display">\[\log(f(x)) = -\alpha \cdot \log(x) + \log(C)\]</span> We can estimate the exponent <span class="math inline">\(\alpha\)</span> using linear regression on the log-transformed data.</p>
+<hr>
+<p><a href="https://github.com/flupppi/networks/blob/main/networks/networks03.py#L8" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="plot_linregress_comparison" class="level3">
+<h3 class="anchored" data-anchor-id="plot_linregress_comparison">plot_linregress_comparison</h3>
+<blockquote class="blockquote">
+<pre><code> plot_linregress_comparison (x, y, name, ax)</code></pre>
+</blockquote>
+<div id="a8919672-3149-48cb-8764-c5a3450eb160" class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated power-law exponent f(x): α ≈ 2.70
+R-squared f(x): 1.000000
+Estimated power-law exponent g(x): α ≈ 3.16
+R-squared g(x): 0.850754</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The estimated slope from the regression of <span class="math inline">\(f(x)\)</span> is -<span class="math inline">\(\alpha\)</span>, giving us <span class="math inline">\(\alpha \approx 2.70\)</span></p>
+<p>The <span class="math inline">\(R^2\)</span> value of the regression is <span class="math inline">\(1.0\)</span>, indicating a strong fit.</p>
+<p>For <span class="math inline">\(g(x)\)</span> we see that it does not follow a clear power-law pattern based on the regression and the low <span class="math inline">\(R^2\)</span> value.</p>
+</section>
+</section>
+<section id="categorizing-networks" class="level2">
+<h2 class="anchored" data-anchor-id="categorizing-networks">2) Categorizing Networks</h2>
+<p>(2 points) In the lecture we discussed a simple way to quantify assortativity and to assign a network into one of the three categories by fitting a power function to the degree correlation <span class="math inline">\(\bar k_{nn}(k)\)</span>. Try this approach for the networks <code>As3G1.txt</code> and <code>As3G2.txt</code> in Ilias and report your results. Note this correlation is implemented (e.g.&nbsp;in networkx as average_degree_connectivity) A more formally sound version is to simply use the Pearson correlation coefficient <span class="math inline">\(r\)</span> of the degrees at either ends of the graph’s edges. As it is normalized, it lies between <span class="math inline">\(-1≤r≤1\)</span> and can be interpreted the same way as our correlation exponent. <span class="math display">\[r = \frac{1}{\sigma^2_q}\sum_{jk}jk(e_{jk}-q_jq_k)\]</span> with <span class="math inline">\(\sigma_q^2\)</span> being the variance of excess degree distribution <span class="math inline">\(q(k)\)</span>. Luckily, this measure is also already implemented in many analysis tools (e.g.&nbsp;networkx as degree_pearson_correlation_coefficient). Apply the method on the network, report your result and compare to the finding for the first method. Then run a number (e.g.&nbsp;10) of degree sequence preserving randomization and report if/which changes occur to the second measure.</p>
+<section id="solution-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-1">Solution</h3>
+<p>To provide a solution to the exercise: Provide the diagram for the fitting, and your correlation exponent, the result for pearson correlation for the original and randomised networks.</p>
+<p>The networks are stored as edge lists. <code>As3G2</code> additionally has edge weights. So first we need to load them:</p>
+<div id="71551bef-e04d-4b9b-bcdf-1e460fcbeee4" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G1 <span class="op">=</span> nx.read_adjlist(<span class="st">"../data/As3G1.txt"</span>, nodetype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(G1.edges))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(G1.nodes))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>G2 <span class="op">=</span> nx.Graph()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/As3G2.txt"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        a, b, attr <span class="op">=</span> line.strip().split(maxsplit<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        G2.add_edge(a, b, <span class="op">**</span>ast.literal_eval(attr))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(G2.edges))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(G2.nodes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>565
+430
+254
+77</code></pre>
+</div>
+</div>
+<p>To quantify the assortativity of the network we solve <span class="math inline">\(\bar k_{nn} = ak^\mu\)</span> for the correlation exponent <span class="math inline">\(\mu\)</span> and categorize it. * <span class="math inline">\(μ&gt;0\)</span>: assortative (high-degree nodes link to high-degree) * <span class="math inline">\(μ&lt;0\)</span>: disassortative * <span class="math inline">\(μ≈0\)</span>: neutral</p>
+<hr>
+<p><a href="https://github.com/flupppi/networks/blob/main/networks/networks03.py#L30" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="power_law" class="level3">
+<h3 class="anchored" data-anchor-id="power_law">power_law</h3>
+<blockquote class="blockquote">
+<pre><code> power_law (x, a, b)</code></pre>
+</blockquote>
+<p>We compute the <a href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.assortativity.average_degree_connectivity.html">average degree connectivity</a> and get a dictionary keyed by degree k with the value of average connectivity.</p>
+<p>We can fit a line on these values to get an estimation of our correlation exponent.</p>
+<hr>
+<p><a href="https://github.com/flupppi/networks/blob/main/networks/networks03.py#L34" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="fit_degree_connectivity" class="level3">
+<h3 class="anchored" data-anchor-id="fit_degree_connectivity">fit_degree_connectivity</h3>
+<blockquote class="blockquote">
+<pre><code> fit_degree_connectivity (graph, title)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/flupppi/networks/blob/main/networks/networks03.py#L58" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="categorize_assortativity" class="level3">
+<h3 class="anchored" data-anchor-id="categorize_assortativity">categorize_assortativity</h3>
+<blockquote class="blockquote">
+<pre><code> categorize_assortativity (mu, name)</code></pre>
+</blockquote>
+<div id="c905844f-42a7-4ff7-8a99-efe003afac34" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mu_G1 <span class="op">=</span> fit_degree_connectivity(G1, <span class="st">"G1: Degree Correlation Fit"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mu_G2 <span class="op">=</span> fit_degree_connectivity(G2, <span class="st">"G2: Degree Correlation Fit"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>categorize_assortativity(mu_G1, <span class="st">"G1"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>categorize_assortativity(mu_G2, <span class="st">"G2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The calculated exponentv for G1: 0.523 shows a assortative degree correlation.
+The calculated exponentv for G2: -0.145 shows a disassortative degree correlation.</code></pre>
+</div>
+</div>
+<p>Next we should compare the <code>average_degree_connectivity</code> with the <a href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.assortativity.degree_pearson_correlation_coefficient.html">degree_pearson_correlation_coefficient</a> results which returns the assortativity of graph by degree.</p>
+<div id="42fb841b-bb86-43ff-8e32-1ccc91b720a4" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare the results</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pearson_G1 <span class="op">=</span> nx.degree_pearson_correlation_coefficient(G1)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pearson_G2 <span class="op">=</span> nx.degree_pearson_correlation_coefficient(G2)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"G1 Pearson: </span><span class="sc">{</span>pearson_G1<span class="sc">:.4f}</span><span class="ss">, G2 Pearson: </span><span class="sc">{</span>pearson_G2<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>G1 Pearson: 0.7332, G2 Pearson: -0.1652</code></pre>
+</div>
+</div>
+<p>Here, <span class="math inline">\(G1\)</span> is assortative and <span class="math inline">\(G2\)</span> is disassortative.</p>
+<p>Next we should run 10 degree sequence preserving randomizations and show which changes occur in the second measure. We do this by swapping edges in the network.</p>
+<ul>
+<li>If the randomized networks lose any assortativity, that suggests the observed structure is meaningful.</li>
+<li>If the Pearson correlation stays similar → the degree sequence alone explains assortativity.</li>
+</ul>
+<p>In the results we can see that for <span class="math inline">\(G1\)</span> the assortativity clearly changes to negative or very small values suggesting that the structure is meaningful.</p>
+<p>For <span class="math inline">\(G1\)</span> there is no such change visible.</p>
+<hr>
+<p><a href="https://github.com/flupppi/networks/blob/main/networks/networks03.py#L70" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="randomize_and_measure" class="level3">
+<h3 class="anchored" data-anchor-id="randomize_and_measure">randomize_and_measure</h3>
+<blockquote class="blockquote">
+<pre><code> randomize_and_measure (graph, n_iter=10)</code></pre>
+</blockquote>
+<div id="ae5a13df-a519-41ae-8014-5ea08bbec6b1" class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Randomized Pearson G1: [0.004137654023765612, -0.0729776597452127, -0.05565167531120767, -0.10058177053837325, -0.011426365891527044, -0.027460243011809632, -0.036857387111609005, -0.046195799060784595, -0.09183068009543512, -0.03245247581482806]
+Randomized Pearson G2: [-0.197891215644392, -0.11538767953142574, -0.23489350233836423, -0.15175398942284535, -0.15909663068868046, -0.1306511227926893, -0.17175835066677408, -0.1566105395514292, -0.18083547412138914, -0.2259320110296678]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="finding-a-graph-with-certain-properties" class="level2">
+<h2 class="anchored" data-anchor-id="finding-a-graph-with-certain-properties">3) Finding a graph with certain properties</h2>
+<p>(2 points) We discussed in the lecture that there are differing definitions for average (<span class="math inline">\(C_G\)</span>) and global clustering coefficient (<span class="math inline">\(C_{GG}\)</span>).</p>
+<ul>
+<li><ol type="a">
+<li>Given the double star graph family from Assignment 2.2, where we showed that both values diverge (<span class="math inline">\(C_G \rightarrow 1\)</span>, <span class="math inline">\(C_{GG} \rightarrow 0\)</span>) for increasing <span class="math inline">\(k\)</span> (periphery nodes): Can you find a graph family for which they approach the opposite values or at least go in the opposite direction compared to double star? In case, describe it and give the general formula for its clustering coefficients.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>What is the smallest graph you can find for which the two values differ?</li>
+</ol></li>
+</ul>
+<section id="solution-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-2">Solution</h3>
+<p>To provide a solution to the exercise: Provide the description, formula, and graph.</p>
+<ul>
+<li>Ich hab keine ahnung wie ich das angehen sollte ausser das an Gpt zu senden.</li>
+</ul>
+<p>In exercise 2.2 we looked at a network with two core nodes connected by an edge, and k peripheral nodes that each are connected exactly to the two core nodes (creating triangles): We observed the values for <span class="math inline">\(C_G\)</span> and <span class="math inline">\(C_{GG}\)</span> noting that for large <span class="math inline">\(k\)</span>, <span class="math inline">\(C_G\)</span> was much larger than <span class="math inline">\(C_{GG}\)</span>.</p>
+<p>So to flip it, we want: * Many connected triplets (to raise the denominator of <span class="math inline">\(C_G\)</span>) * Few locally closed triangles for most nodes (to keep <span class="math inline">\(C_G\)</span>) * But still many triangles in total (to raise numerator of <span class="math inline">\(C_{GG}\)</span>)</p>
+<p>We define a graph family consisting of a clique of size <span class="math inline">\(k\)</span> and <span class="math inline">\(n−k\)</span> isolated nodes. The global clustering coefficient is always <span class="math inline">\(C_{GG}=1\)</span>, while the average local clustering coefficient is <span class="math inline">\(C_G=\frac{k}{n}\)</span>, which goes to <span class="math inline">\(0\)</span> as <span class="math inline">\(n\rightarrow\infty\)</span></p>
+<p>This is the opposite of the double star graph family, where <span class="math inline">\(C_G→1\)</span>, but <span class="math inline">\(C_{GG}→0\)</span>.</p>
+<ol type="1">
+<li><p>Global clustering <span class="math inline">\(C_GG\)</span>:</p>
+<p>The clique has <span class="math inline">\(\begin{pmatrix}k\\3\end{pmatrix}\)</span> triangles and <span class="math inline">\(\begin{pmatrix}k\\2\end{pmatrix}\cdot(k−2)\)</span> triplets.</p>
+<p>The isolated nodes add nothing.</p>
+<p>So: <span class="math display">\[C_{GG}=\frac{3\cdot\begin{pmatrix}k\\3\end{pmatrix}}{\begin{pmatrix}k\\3\end{pmatrix}\cdot \frac{k-2}{3}} = 1\]</span> (since it’s a clique → every triplet is closed → <span class="math inline">\(C_{GG}=1\)</span>)</p></li>
+<li><p>Average local clustering <span class="math inline">\(C_G\)</span>:</p>
+<p>Clique nodes have <span class="math inline">\(C_v=1\)</span></p>
+<p>Isolated nodes have <span class="math inline">\(C_v=0\)</span></p>
+<p>So: <span class="math display">\[C_G=\frac{k⋅1+(n−k)⋅0}{n}=\frac{k}{n}\]</span></p>
+<p><span class="math inline">\(→\)</span> goes to <span class="math inline">\(0\)</span> as <span class="math inline">\(n→∞\)</span> for fixed <span class="math inline">\(k\)</span></p></li>
+</ol>
+<hr>
+<p><a href="https://github.com/flupppi/networks/blob/main/networks/networks03.py#L81" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="clustered_core_with_isolates" class="level3">
+<h3 class="anchored" data-anchor-id="clustered_core_with_isolates">clustered_core_with_isolates</h3>
+<blockquote class="blockquote">
+<pre><code> clustered_core_with_isolates (n=10, k=3)</code></pre>
+</blockquote>
+<p><em>Create a graph with a clique of size <code>k</code> and <code>n-k</code> isolated nodes.</em></p>
+<div id="3107fcb8-4d2b-43ea-ad3f-9117febb5628" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example graph with k=3 (clique) and n=10 (total nodes, 7 isolates)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> clustered_core_with_isolates(n<span class="op">=</span><span class="dv">10</span>, k<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>G1<span class="op">=</span> clustered_core_with_isolates(n<span class="op">=</span><span class="dv">15</span>, k<span class="op">=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9bf42f18-cb08-46ae-89f8-418e9a64b3d4" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="14f59e12-ca14-4045-9ce8-f9fad223c858" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="giant-component" class="level2">
+<h2 class="anchored" data-anchor-id="giant-component">4) Giant component</h2>
+<p>(2 points) In the last lecture we discussed the growth of the giant component during the creation of a graph by the random model. Run an experiment with increasing values of the edge probability and report the development of the giant component size (relative to the number of nodes in the graph) in relation to the probability values.</p>
+<section id="solution-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-3">Solution</h3>
+<p>To provide a solution to the exercise: Provide a diagram that shows the development of the size over the range of probability values.</p>
+<p>For <span class="math inline">\(n = 1000\)</span> nodes and <span class="math inline">\(100\)</span> values in the probability range from <span class="math inline">\(p\in[0, 0.01]\)</span>, at each step we generate a random graph <span class="math inline">\(G(n,p)\)</span> and compute the relative size of the largest connected component <span class="math display">\[\frac{\text{size of largest component}}{n}\]</span></p>
+<p>We plot the critical threshold for the emergence of the giant component in as approximately <span class="math inline">\(p = \frac{1}{n}\)</span></p>
+<ul>
+<li>Below the threshold, most components are small.</li>
+<li>Around the threshold, the large connected component suddenly grows.</li>
+<li>Above the threshold, the giant component rapidly dominates the graph.</li>
+</ul>
+<div id="75c93e09-5f83-41aa-b367-bd1b8ba368e1" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="rich-club" class="level2">
+<h2 class="anchored" data-anchor-id="rich-club">5) Rich Club</h2>
+<p>(2 points) Select two networks from different categories of the SNAP Large Network Collection (https://snap.stanford.edu/data/index.html). Calculate the simple version of the rich club coefficient (<span class="math inline">\(\phi(k)\)</span> ) for each network and report it in a diagram as shown in the lecture. Then calculate the improved version <span class="math inline">\(\rho_{ran}(k)\)</span> and report the result.</p>
+<section id="solution-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-4">Solution</h3>
+<p>To provide a solution to the exercise: Shortly describe the networks, provide the diagrams and your verdict on rich club phenomenon.</p>
+<p>What is the formula for <span class="math inline">\(\phi (k)\)</span> and <span class="math inline">\(\rho_{ran} (k)\)</span>.</p>
+<p>Use each formula to implement an algorithm solving this calculation and apply it to the graph. Alternately use a predefined algorithm if it is available and just</p>
+<section id="networks-used" class="level4">
+<h4 class="anchored" data-anchor-id="networks-used">Networks Used</h4>
+<p>Wikipedia Vote Network (directed, but we make it undirected)</p>
+<ul>
+<li>Nodes: 7,115</li>
+<li>Edges: 103,689</li>
+<li>Description: Directed graph of Wikipedia users voting in admin elections. An edge from user A to B means A voted for B.</li>
+<li>Source: <a href="https://snap.stanford.edu/data/wiki-Vote.html">SNAP Wiki-Vote</a></li>
+</ul>
+<p>California road network (undirected)</p>
+<ul>
+<li>Nodes: 1,965,206</li>
+<li>Edges: 2,766,607</li>
+<li>Description: A road network of California. Intersections and endpoints are represented by nodes and the roads connecting these intersections or road endpoints are represented by undirected edges.</li>
+<li>Source: <a href="https://snap.stanford.edu/data/roadNet-CA.html">SNAP California Road</a></li>
+</ul>
+<p>EU Email Communication Network (sadly does not work because of self loops)</p>
+<ul>
+<li>Nodes: 265,214</li>
+<li>Edges: 420,045</li>
+<li>Description: Directed email exchange graph from a European research institution. An edge from A to B means A sent an email to B.</li>
+<li>Source: <a href="https://snap.stanford.edu/data/email-EuAll.html">SNAP Email-EuAll</a></li>
+</ul>
+</section>
+<section id="rich-club-1" class="level4">
+<h4 class="anchored" data-anchor-id="rich-club-1">Rich Club</h4>
+<p>The rich club coefficient <span class="math inline">\(φ(k)\)</span> measures the tendency of high-degree nodes (<span class="math inline">\(degree &gt; k\)</span>) to be more densely interconnected than expected.</p>
+<p>Simple Rich-Club Coefficient: <span class="math display">\[ϕ(k)=\frac{2E_k}{N_k(N_k−1)}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(N_k\)</span>: number of nodes with degree &gt; kk</li>
+<li><span class="math inline">\(E_k\)</span>: number of edges between those nodes</li>
+</ul>
+<p>Normalized Rich-Club Coefficient (Improved Version): <span class="math display">\[ρ(k)=\frac{ϕ(k)}{ϕ_{rand}(k)}\]</span></p>
+<p>Where <span class="math inline">\(ϕ_{rand}(k)\)</span> is the rich-club coefficient for a randomized version of the network with the same degree distribution.</p>
+<p>A value <span class="math inline">\(ρ(k)&gt;1\)</span> indicates a rich club phenomenon.</p>
+<div id="81d14805-8457-4b8c-aac9-d7d656f26a62" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading the graphs</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#G_email = nx.read_adjlist("../data/email-EuAll.txt", nodetype=int, create_using=nx.DiGraph())</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#G_email = G_email.to_undirected()</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>G_wiki <span class="op">=</span> nx.read_adjlist(<span class="st">"../data/Wiki-Vote.txt"</span>, nodetype<span class="op">=</span><span class="bu">int</span>, create_using<span class="op">=</span>nx.DiGraph())</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>G_wiki <span class="op">=</span> G_wiki.to_undirected()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f6c37999-15a7-4e54-9ce8-01682f8679e0" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>G_road <span class="op">=</span> nx.read_adjlist(<span class="st">"../data/roadNet-CA.txt"</span>, nodetype<span class="op">=</span><span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0560764b-fe59-4fac-98bd-3e85ece68252" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rich_road <span class="op">=</span> nx.rich_club_coefficient(G_road, normalized<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># doesnt work because it has self loops</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># rich_email = nx.rich_club_coefficient(G_email, normalized=False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="aca4ee0d-1f93-41b4-af26-5780a58d2958" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple rich-club coefficient</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>rich_wiki <span class="op">=</span> nx.rich_club_coefficient(G_wiki, normalized<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="51c4d39a-7af8-4fb3-b98f-80e39b73037e" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalized version</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>rich_wiki_norm <span class="op">=</span> nx.rich_club_coefficient(G_wiki, normalized<span class="op">=</span><span class="va">True</span>, Q<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f540958f-de5e-4214-9d73-2738a8d4c34e" class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalized version</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rich_road_norm = nx.rich_club_coefficient(G_norm, normalized=True, Q=10)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tooo slow, didnt finsih. I guess the Graph is just too large.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6614e11d-73ba-4df9-b1de-64f7a85f20ac" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_network_analysis_exercise_03_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/flupppi\.github\.io\/networks");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/flupppi/networks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
